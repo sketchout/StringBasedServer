@@ -2,6 +2,7 @@ package com.macyoo.chat;
 
 public class Room {
 
+	// Name of Room
 	String name ;
 	
 	public Room() {
