@@ -1,4 +1,4 @@
-package com.macyoo.main;
+package com.macyoo.db.connection;
 
 import java.sql.*;
 

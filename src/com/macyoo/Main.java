@@ -1,17 +1,17 @@
-package com.macyoo.main;
+package com.macyoo;
 
 import java.net.UnknownHostException;
 
-import com.macyoo.db.PostgresConnectionManager;
-import com.macyoo.handler.HandlerMessage;
-import com.macyoo.handler.HandlerQueue;
-import com.macyoo.handler.MessageBuffer;
+import com.macyoo.db.connection.PostgresConnectionManager;
+import com.macyoo.servers.MessageHandleServer;
+import com.macyoo.servers.MessageQueue;
+import com.macyoo.servers.QueueHandleThread;
 
 public class Main {
 	
 	//static DatabasePostgresql con = null;
 	
-	static MessageBuffer storage;
+	static MessageQueue storage;
 	
 	static PostgresConnectionManager pcm;
 	
@@ -28,13 +28,13 @@ public class Main {
 		
 		pcm = new PostgresConnectionManager();
 		
-		storage = new MessageBuffer();
+		storage = new MessageQueue();
 		
-		HandlerMessage mH = new HandlerMessage(storage,9090);
+		MessageHandleServer mH = new MessageHandleServer(storage,9090);
 		mH.start();
 		
 		// multi thread
-		HandlerQueue t = new HandlerQueue(storage, pcm);
+		QueueHandleThread t = new QueueHandleThread(storage, pcm);
 		t.start();
 		
 		try {

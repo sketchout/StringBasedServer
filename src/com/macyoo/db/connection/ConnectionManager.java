@@ -1,4 +1,4 @@
-package com.macyoo.db;
+package com.macyoo.db.connection;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Properties;
 
-import com.macyoo.dbpool.DBConnectionPoolManager;
+import com.macyoo.db.pool.DBConnectionPoolManager;
 
 public abstract class ConnectionManager {
 

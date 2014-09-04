@@ -12,20 +12,20 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.macyoo.util.LogHandler;
+import com.macyoo.util.LoggerHandle;
 
-public class ThreadAccept extends Thread {
+public class AcceptThread extends Thread {
 	
-	protected LogHandler logHandler;
+	protected LoggerHandle logHandler;
 	
 	protected Selector selector;
 	ServerSocketChannel ssc;
 	
 	int targetPort;
-	ManageList manageSocket;
+	SocketManager manageSocket;
 	Logger logger;
 	
-	public ThreadAccept(int targetPort , ManageList msc ) {
+	public AcceptThread(int targetPort , SocketManager msc ) {
 		
 		this.targetPort = targetPort;
 		this.manageSocket = msc;
@@ -33,7 +33,7 @@ public class ThreadAccept extends Thread {
 		logger = Logger.getLogger( getClass() );
 		
 		// logHandler
-		logHandler = new LogHandler(logger);
+		logHandler = new LoggerHandle(logger);
 		logHandler.SetPort(targetPort);
 	
 	}
@@ -118,7 +118,7 @@ public class ThreadAccept extends Thread {
 	
 	public boolean getShouldAllowNewConnection() {
 		
-		if ( this.getNumberOfConnectedChannels() > ManageList.defaultMaxUser ) {
+		if ( this.getNumberOfConnectedChannels() > SocketManager.defaultMaxUser ) {
 			logHandler.error( "size: "+ this.getNumberOfConnectedChannels() );
 			return false;
 		}

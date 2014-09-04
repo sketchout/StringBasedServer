@@ -1,4 +1,4 @@
-package com.macyoo.dbsql;
+package com.macyoo.db.sql;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

@@ -9,7 +9,7 @@ import java.util.*;
 
 import org.apache.log4j.*;
 
-import com.macyoo.util.LogHandler;
+import com.macyoo.util.LoggerHandle;
 
 import static org.javagamesfactory.nioservers.ServerState.*;
 
@@ -51,7 +51,7 @@ public abstract class StringBasedServer implements Runnable
 	
 	protected Logger logger, verboseLogger;
 	Thread thread;
-	protected LogHandler logHandler;
+	protected LoggerHandle logHandler;
 	
 	// ServerState
 	protected ServerState status = INITIALIZING;
@@ -84,8 +84,8 @@ public abstract class StringBasedServer implements Runnable
 	long currentIsReadableProcessingBegan = Integer.MAX_VALUE;
 	long lastPostProcessBegan = Integer.MAX_VALUE;
 
-	ManageList manageSocket;
-	ThreadAccept acceptHandler;
+	SocketManager manageSocket;
+	AcceptThread acceptHandler;
 /*	
 	protected LinkedList<SocketChannel> connectedChannels;
 */	
@@ -120,10 +120,10 @@ public abstract class StringBasedServer implements Runnable
 		verboseLogger = Logger.getLogger( getClass().getName() + ".verbose" );
 		
 		// ServerChannels
-		manageSocket = new ManageList();
+		manageSocket = new SocketManager();
 
 		// logHandler
-		logHandler = new LogHandler(logger);
+		logHandler = new LoggerHandle(logger);
 		logHandler.SetPort(p);
 		
 		//logHandler.error( "Port : " + p + " Buf Siz : " + newBufferSize );
@@ -159,7 +159,7 @@ public abstract class StringBasedServer implements Runnable
 	{
 		
 		// separate the accept
-		acceptHandler = new ThreadAccept(targetPort, manageSocket);
+		acceptHandler = new AcceptThread(targetPort, manageSocket);
 		acceptHandler.start();
 		
 		status = STARTED;
@@ -837,7 +837,7 @@ protected String readIncomingMessageFromKey( SelectionKey key ) throws IOExcepti
 
 	public boolean getShouldAllowNewConnection() {
 		
-		if ( this.getNumberOfConnectedChannels() > ManageList.defaultMaxUser ) {
+		if ( this.getNumberOfConnectedChannels() > SocketManager.defaultMaxUser ) {
 			
 			logHandler.error( "size: "+ this.getNumberOfConnectedChannels() );
 			

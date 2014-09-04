@@ -1,6 +1,6 @@
-package com.macyoo.db;
+package com.macyoo.db.connection;
 
-import com.macyoo.dbpool.DBConnectionPoolManager;
+import com.macyoo.db.pool.DBConnectionPoolManager;
 
 public class PostgresConnectionManager extends ConnectionManager {
 

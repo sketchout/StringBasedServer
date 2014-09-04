@@ -1,4 +1,4 @@
-package com.macyoo.dbpool;
+package com.macyoo.db.pool;
 
 import java.sql.Connection;
 import java.util.Hashtable;

@@ -2,13 +2,13 @@ package com.macyoo.util;
 
 import org.apache.log4j.Logger;
 
-public class LogHandler {
+public class LoggerHandle {
 	
 	Logger logger ;
 	Thread thread;
 	int port;
 
-	public LogHandler(Logger logger) {
+	public LoggerHandle(Logger logger) {
 		
 		this.logger = logger;
 		this.thread = null;
@@ -28,7 +28,8 @@ public class LogHandler {
 	 * @param s
 	 */
 	public void error( String s ) {
-		logger.error( "[" + ((thread == null) ? "NULL" : thread.getName()) + ":" + port + "] " + s );
+		logger.error( "[" + ((thread == null) ? "NULL" : thread.getName()) 
+				+ ":" + port + "] " + s );
 	}
 	
 	/**
@@ -39,7 +40,8 @@ public class LogHandler {
 	 */
 	public void debug( String s )
 	{
-		logger.debug( "[" + ((thread == null) ? "NULL" : thread.getName()) + ":" + port + "] " + s );
+		logger.debug( "[" + ((thread == null) ? "NULL" : thread.getName()) 
+				+ ":" + port + "] " + s );
 	}
 	
 
@@ -51,7 +53,8 @@ public class LogHandler {
 	 */
 	public void info( String s )
 	{
-		logger.info( "[" + ((thread == null) ? "NULL" : thread.getName()) + ":" + port + "] " + s );
+		logger.info( "[" + ((thread == null) ? "NULL" : thread.getName()) 
+				+ ":" + port + "] " + s );
 	}
 	
 	/**
@@ -63,7 +66,8 @@ public class LogHandler {
 	/*
 	protected void debugVerbose( String s )
 	{
-		verboseLogger.debug( "[" + ((thread == null) ? "NULL" : thread.getName()) + ":" + port + "] " + s );
+		verboseLogger.debug( "[" + ((thread == null) ? "NULL" : thread.getName())
+		 + ":" + port + "] " + s );
 	}
 	*/	
 	/**
@@ -75,7 +79,8 @@ public class LogHandler {
 	/*
 	protected void infoVerbose( String s )
 	{
-		verboseLogger.info( "[" + ((thread == null) ? "NULL" : thread.getName()) + ":" + port + "] " + s );
+		verboseLogger.info( "[" + ((thread == null) ? "NULL" : thread.getName()) 
+		+ ":" + port + "] " + s );
 	}
 	*/
 	/**
@@ -86,7 +91,8 @@ public class LogHandler {
 	 */
 	public void info( String s, Throwable t )
 	{
-		logger.info( "[" + ((thread == null) ? "NULL" : thread.getName()) + ":" + port + "] " + s, t );
+		logger.info( "[" + ((thread == null) ? "NULL" : thread.getName())
+				+ ":" + port + "] " + s, t );
 	}
 	
 
@@ -98,7 +104,10 @@ public class LogHandler {
 	 */
 	public void error( String s, Throwable t )
 	{
-		//logger.error( "[" + ((thread == null) ? "NULL" : thread.getName()) + ":" + port + "] " + s, t );
+		/*
+		logger.error( "[" + ((thread == null) ? "NULL" : thread.getName()) 
+			+ ":" + port + "] " + s, t );
+		*/
 		logger.error(  s, t );
 	}
 }

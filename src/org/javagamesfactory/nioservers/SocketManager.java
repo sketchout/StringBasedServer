@@ -3,9 +3,9 @@ package org.javagamesfactory.nioservers;
 import java.nio.channels.SocketChannel;
 import java.util.LinkedList;
 
-import com.macyoo.handler.KeyMessage;
+import com.macyoo.servers.SelectionKeyMessage;
 
-public class ManageList {
+public class SocketManager {
 
 	
 	public static int defaultMaxUser = 5000;
@@ -14,7 +14,7 @@ public class ManageList {
 	
 	public  LinkedList<SocketChannel> connectedSocketChannelList;
 	
-	public ManageList() {
+	public SocketManager() {
 		
 		acceptedSocketChannelList = new LinkedList<SocketChannel>();
 		

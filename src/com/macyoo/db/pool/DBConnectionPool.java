@@ -1,11 +1,11 @@
-package com.macyoo.dbpool;
+package com.macyoo.db.pool;
 
 import java.sql.*;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-import com.macyoo.util.LogHandler;
+import com.macyoo.util.LoggerHandle;
 
 public class DBConnectionPool {
 
@@ -23,7 +23,7 @@ public class DBConnectionPool {
 	private String URL;
 	
 	protected Logger logger ;
-	protected LogHandler logHandler = null ;
+	protected LoggerHandle logHandler = null ;
 	
 	DBConnectionPool(String name, String URL, String user, String password, 
 				int maxConn, int initConn,int waitTime) {
@@ -105,7 +105,7 @@ public class DBConnectionPool {
 	public void setLogger() {
 		logger = Logger.getLogger( getClass() ); 
 		if ( logHandler == null ) {
-			logHandler = new LogHandler(logger);
+			logHandler = new LoggerHandle(logger);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package com.macyoo.dbsql;
+package com.macyoo.db.sql;
 
 public class Friend {
 
