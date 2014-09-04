@@ -4,7 +4,7 @@ import com.macyoo.db.pool.DBConnectionPoolManager;
 
 public class PostgresConnectionManager extends ConnectionManager {
 
-	public PostgresConnectionManager() {
+	public PostgresConnectionManager() throws ClassNotFoundException {
 		
 		super("postgresql");
 		
@@ -15,7 +15,13 @@ public class PostgresConnectionManager extends ConnectionManager {
 		
 		connMgr = DBConnectionPoolManager.getInstance();
 		
-		connMgr.init( poolName, JDBCDriver, url, userID, passwd, maxConn, initConn, maxWait);
+		System.out.println("dbServer["+dbServer+"]");
+		System.out.println("port["+port+"]");
+		System.out.println("dbName["+dbName+"]");
+		
+		connMgr.init( poolName, JDBCDriver, url, 
+				userID, passwd, maxConn, initConn, maxWait);
+		
 	}
 
 }

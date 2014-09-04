@@ -113,14 +113,12 @@ public class DBConnectionPoolManager {
 	 * @revision : 
 	 * @method description :
 	 * @param driverClassName
+	 * @throws ClassNotFoundException 
 	 */
-	private void loadDrivers(String driverClassName) {
-		try {
-			Class.forName(driverClassName);
-		} catch (ClassNotFoundException e) {
-			// Not Found
-			e.printStackTrace();
-		}
+	private void loadDrivers(String driverClassName) throws ClassNotFoundException {
+		
+		Class.forName(driverClassName);
+		
 		drivers.addElement(driverClassName);
 	}
 	
@@ -138,9 +136,10 @@ public class DBConnectionPoolManager {
 	 * @param maxConn
 	 * @param initConn
 	 * @param maxWait
+	 * @throws ClassNotFoundException 
 	 */
 	public void init(String poolName, String driver, String url, String user, String password, 
-			int maxConn, int initConn, int maxWait) {
+			int maxConn, int initConn, int maxWait) throws ClassNotFoundException {
 		loadDrivers(driver);
 		createPools(poolName, url, user, password, maxConn, initConn, maxWait);
 	}

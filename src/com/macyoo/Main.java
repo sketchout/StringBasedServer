@@ -9,38 +9,50 @@ import com.macyoo.servers.QueueHandleThread;
 
 public class Main {
 	
-	//static DatabasePostgresql con = null;
 	
 	static MessageQueue storage;
-	
 	static PostgresConnectionManager pcm;
+
+	MessageHandleServer mainThread;
+	QueueHandleThread qThread;
 	
-	// main ()
-	public static void main(String[] args) throws UnknownHostException  {
-		try {
-			//con = new DatabasePostgresql();
-			//con.connect("mydb");
-			
-			// // con.close(); //
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
+	
+	public Main() throws UnknownHostException, ClassNotFoundException {
 		
 		pcm = new PostgresConnectionManager();
-		
 		storage = new MessageQueue();
+	
+		mainThread = new MessageHandleServer(storage,9090);
+		qThread = new QueueHandleThread(storage, pcm);
+	}
+
+	public void beginStart() throws InterruptedException {
 		
-		MessageHandleServer mH = new MessageHandleServer(storage,9090);
-		mH.start();
+		mainThread.start();
+		qThread.start();
 		
-		// multi thread
-		QueueHandleThread t = new QueueHandleThread(storage, pcm);
-		t.start();
+		qThread.join();
 		
+	}
+	
+	public static void main(String[] args)  {
+		
+		Main m = null;
 		try {
-			t.join();
+			m = new Main();
+		} catch (UnknownHostException | ClassNotFoundException e) {
+
+			e.printStackTrace();
+			System.out.println("System exit");
+			System.exit(1);
+			
+		}
+		try {
+			m.beginStart();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			System.out.println("System exit");
+			System.exit(1);
 		}
 	}
 }
